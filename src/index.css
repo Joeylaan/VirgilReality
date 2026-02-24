@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
+
+@import "tailwindcss";
+
+/* VirgilReality Design Tokens */
+:root {
+  /* Colors */
+  --color-primary: #00FF00;
+  --color-secondary: #FF1744;
+  --color-dark: #0A0A0A;
+  --color-dark-lighter: #1A1A1A;
+  --color-text: #FFFFFF;
+  --color-text-muted: #A0A0A0;
+  --color-accent: #1ED760;
+
+  /* Typography */
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  --spacing-2xl: 4rem;
+
+  /* Transitions */
+  --transition-fast: 150ms ease-in-out;
+  --transition-base: 250ms ease-in-out;
+  --transition-slow: 350ms ease-in-out;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-dark);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Animations */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes timecode {
+  0% { opacity: 0.8; }
+  50% { opacity: 1; }
+  100% { opacity: 0.8; }
+}
+
+@keyframes recBlink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.animate-blink {
+  animation: blink 1s infinite;
+}
+
+.animate-timecode {
+  animation: timecode 2s ease-in-out infinite;
+}
+
+.animate-rec {
+  animation: recBlink 1s infinite;
+}
+
+/* Projects Section Responsive */
+.projects-row {
+  display: flex;
+  gap: 24px;
+  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.projects-card-large {
+  width: 420px;
+  height: 280px;
+  flex-shrink: 0;
+}
+
+.projects-card-small {
+  width: 305px;
+  height: 200px;
+  flex-shrink: 0;
+}
+
+/* Tablet breakpoint (768px) */
+@media (max-width: 1024px) {
+  .projects-card-large {
+    width: 350px;
+    height: 233px;
+  }
+
+  .projects-card-small {
+    width: 250px;
+    height: 167px;
+  }
+}
+
+/* Mobile breakpoint (640px) */
+@media (max-width: 768px) {
+  .projects-row {
+    gap: 16px;
+    padding: 0 16px;
+  }
+
+  .projects-card-large {
+    width: 280px;
+    height: 187px;
+  }
+
+  .projects-card-small {
+    width: 280px;
+    height: 187px;
+  }
+}
+
+/* Small mobile (480px) */
+@media (max-width: 480px) {
+  .projects-card-large,
+  .projects-card-small {
+    width: 100%;
+    max-width: 320px;
+    height: 213px;
+  }
+}
