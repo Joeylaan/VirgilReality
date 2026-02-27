@@ -49,7 +49,8 @@ const ServiceItem: React.FC<ServiceItemProps> = ({ number, title, description })
         color: '#888888',
         lineHeight: 1.6,
         margin: 0,
-        width: '380px',
+        width: '100%',
+        maxWidth: '380px',
       }}
     >
       {description}
@@ -99,13 +100,13 @@ const Services: React.FC = () => {
       id="diensten"
       style={{
         backgroundColor: '#0A0A0A',
-        paddingTop: '100px',
-        paddingBottom: '100px',
-        paddingLeft: '60px',
-        paddingRight: '60px',
+        paddingTop: 'clamp(60px, 8vw, 100px)',
+        paddingBottom: 'clamp(60px, 8vw, 100px)',
+        paddingLeft: 'clamp(24px, 4vw, 60px)',
+        paddingRight: 'clamp(24px, 4vw, 60px)',
         display: 'flex',
         flexDirection: 'column',
-        gap: '64px',
+        gap: 'clamp(40px, 6vw, 64px)',
         width: '100%',
       }}
     >
@@ -154,14 +155,8 @@ const Services: React.FC = () => {
         </span>
       </div>
 
-      {/* Services 2-column grid */}
-      <div
-        style={{
-          display: 'flex',
-          gap: '32px',
-          width: '100%',
-        }}
-      >
+      {/* Services grid — CSS-driven: column on mobile, row on desktop */}
+      <div className="services-columns">
         <div style={{ display: 'flex', flexDirection: 'column', gap: '32px', flex: 1 }}>
           {col1.map((s) => (
             <ServiceItem key={s.number} {...s} />

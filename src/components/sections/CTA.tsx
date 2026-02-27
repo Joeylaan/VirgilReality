@@ -20,20 +20,24 @@ const CTA: React.FC = () => {
       id="contact"
       style={{
         backgroundColor: '#000000',
-        height: '500px',
+        minHeight: 'clamp(400px, 50vh, 500px)',
+        height: 'auto',
+        paddingTop: '40px',
+        paddingBottom: '40px',
         width: '100%',
-        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
         overflow: 'hidden',
       }}
     >
-      {/* CTA Viewfinder: 1320x340 at x:60, y:80 */}
+      {/* CTA Viewfinder — fluid width via calc + clamp */}
       <div
         style={{
-          position: 'absolute',
-          left: '60px',
-          top: '80px',
-          width: 'calc(100% - 120px)',
-          height: '340px',
+          position: 'relative',
+          width: 'calc(100% - clamp(48px, 8vw, 120px))',
+          margin: '0 auto',
+          padding: 'clamp(24px, 3vw, 40px)',
         }}
       >
         {/* Corner brackets — red, 40px */}
@@ -42,18 +46,16 @@ const CTA: React.FC = () => {
         <CtaCorner position="bl" />
         <CtaCorner position="br" />
 
-        {/* CTA Content — 800px wide, x:260, y:80 */}
+        {/* CTA Content */}
         <div
           style={{
-            position: 'absolute',
-            left: '50%',
-            top: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '800px',
+            position: 'relative',
+            width: 'min(800px, 90%)',
+            margin: '0 auto',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: '32px',
+            gap: 'clamp(20px, 3vw, 32px)',
           }}
         >
           {/* READY TO RECORD indicator */}
@@ -84,7 +86,7 @@ const CTA: React.FC = () => {
           <h2
             style={{
               fontFamily: 'Inter, sans-serif',
-              fontSize: '56px',
+              fontSize: 'clamp(28px, 5vw, 56px)',
               fontWeight: 800,
               color: '#FFFFFF',
               letterSpacing: '-1px',
@@ -99,7 +101,7 @@ const CTA: React.FC = () => {
           <p
             style={{
               fontFamily: 'Space Mono, monospace',
-              fontSize: '16px',
+              fontSize: 'clamp(13px, 1.5vw, 16px)',
               fontWeight: 400,
               color: '#888888',
               textAlign: 'center',
@@ -109,16 +111,18 @@ const CTA: React.FC = () => {
             Neem contact op voor een vrijblijvend gesprek
           </p>
 
-          {/* Buttons */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+          {/* Buttons — CSS-driven: column on mobile, row on desktop */}
+          <div className="cta-buttons">
             {/* Email button — red fill */}
             <a
               href="mailto:info@virgilreality.nl"
+              className="cta-button-full"
               style={{
                 display: 'flex',
                 alignItems: 'center',
+                justifyContent: 'center',
                 gap: '10px',
-                padding: '16px 32px',
+                padding: 'clamp(14px, 1.5vh, 16px) clamp(24px, 2.5vw, 32px)',
                 backgroundColor: '#FF0000',
                 textDecoration: 'none',
                 cursor: 'pointer',
@@ -138,11 +142,13 @@ const CTA: React.FC = () => {
 
             {/* WhatsApp — white border */}
             <div
+              className="cta-button-full"
               style={{
                 display: 'flex',
                 alignItems: 'center',
+                justifyContent: 'center',
                 gap: '10px',
-                padding: '16px 32px',
+                padding: 'clamp(14px, 1.5vh, 16px) clamp(24px, 2.5vw, 32px)',
                 border: '1px solid #FFFFFF',
                 cursor: 'pointer',
               }}
@@ -161,12 +167,12 @@ const CTA: React.FC = () => {
           </div>
         </div>
 
-        {/* Timecode bottom left */}
+        {/* Timecode — bottom-left of the viewfinder */}
         <span
           style={{
             position: 'absolute',
-            left: '40px',
-            bottom: '0px',
+            left: 'clamp(16px, 3vw, 40px)',
+            bottom: '16px',
             fontFamily: 'Space Mono, monospace',
             fontSize: '14px',
             fontWeight: 400,

@@ -32,19 +32,21 @@ interface ProjectCardProps {
   titleOffset: number;
   labelGap: number;
   className?: string;
+  // Mobile-specific overrides: when true, card fills 100% width at 200px height
+  mobileLayout?: boolean;
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
   title, category, imageUrl, width, height,
   dotSize, cornerSize, labelFontSize, titleFontSize,
-  labelOffset, titleOffset, labelGap, className,
+  labelOffset, titleOffset, labelGap, className, mobileLayout,
 }) => (
   <div
-    className={className}
+    className={mobileLayout ? undefined : className}
     style={{
       position: 'relative',
-      width: `${width}px`,
-      height: `${height}px`,
+      width: mobileLayout ? '100%' : `${width}px`,
+      height: mobileLayout ? '200px' : `${height}px`,
       backgroundImage: `url(${imageUrl})`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
@@ -62,27 +64,27 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     />
 
     {/* Corner brackets */}
-    <CardCorner position="tl" size={cornerSize} />
-    <CardCorner position="tr" size={cornerSize} />
-    <CardCorner position="bl" size={cornerSize} />
-    <CardCorner position="br" size={cornerSize} />
+    <CardCorner position="tl" size={mobileLayout ? 16 : cornerSize} />
+    <CardCorner position="tr" size={mobileLayout ? 16 : cornerSize} />
+    <CardCorner position="bl" size={mobileLayout ? 16 : cornerSize} />
+    <CardCorner position="br" size={mobileLayout ? 16 : cornerSize} />
 
     {/* Category label */}
     <div
       style={{
         position: 'absolute',
-        left: `${labelOffset}px`,
-        top: `${labelOffset}px`,
+        left: `${mobileLayout ? 12 : labelOffset}px`,
+        top: `${mobileLayout ? 12 : labelOffset}px`,
         display: 'flex',
         alignItems: 'center',
-        gap: `${labelGap}px`,
+        gap: `${mobileLayout ? 6 : labelGap}px`,
         zIndex: 1,
       }}
     >
       <div
         style={{
-          width: `${dotSize}px`,
-          height: `${dotSize}px`,
+          width: `${mobileLayout ? 6 : dotSize}px`,
+          height: `${mobileLayout ? 6 : dotSize}px`,
           borderRadius: '50%',
           backgroundColor: '#FF0000',
           flexShrink: 0,
@@ -91,7 +93,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       <span
         style={{
           fontFamily: 'Space Mono, monospace',
-          fontSize: `${labelFontSize}px`,
+          fontSize: `${mobileLayout ? 9 : labelFontSize}px`,
           fontWeight: 400,
           color: '#FFFFFF',
           letterSpacing: '1px',
@@ -105,10 +107,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     <span
       style={{
         position: 'absolute',
-        left: `${labelOffset}px`,
-        bottom: `${titleOffset}px`,
+        left: `${mobileLayout ? 12 : labelOffset}px`,
+        bottom: `${mobileLayout ? 12 : titleOffset}px`,
         fontFamily: 'Inter, sans-serif',
-        fontSize: `${titleFontSize}px`,
+        fontSize: `${mobileLayout ? 14 : titleFontSize}px`,
         fontWeight: 600,
         color: '#FFFFFF',
         zIndex: 1,
@@ -133,18 +135,20 @@ const Projects: React.FC = () => {
     { title: 'Full Production Reel', category: 'FULL PROD', imageUrl: 'https://images.unsplash.com/photo-1556299695-c17a3ebf6fdb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzE5NDI2MTd8&ixlib=rb-4.1.0&q=80&w=1080' },
   ];
 
+  const allCards = [...row1, ...row2];
+
   return (
     <section
       id="werk"
       style={{
         backgroundColor: '#000000',
-        paddingTop: '100px',
-        paddingBottom: '100px',
-        paddingLeft: '60px',
-        paddingRight: '60px',
+        paddingTop: 'clamp(60px, 8vw, 100px)',
+        paddingBottom: 'clamp(60px, 8vw, 100px)',
+        paddingLeft: 'clamp(24px, 4vw, 60px)',
+        paddingRight: 'clamp(24px, 4vw, 60px)',
         display: 'flex',
         flexDirection: 'column',
-        gap: '48px',
+        gap: 'clamp(32px, 4vw, 48px)',
         width: '100%',
       }}
     >
@@ -193,48 +197,73 @@ const Projects: React.FC = () => {
         </span>
       </div>
 
-      {/* Row 1: 3 large cards, 420x280 */}
-      <div className="projects-row">
-        {row1.map((p) => (
+      {/* Mobile: single-column stacked list — shown only below 768px via CSS */}
+      <div className="mobile-projects-list">
+        {allCards.map((p) => (
           <ProjectCard
             key={p.title}
             title={p.title}
             category={p.category}
             imageUrl={p.imageUrl}
-            width={420}
-            height={280}
-            dotSize={8}
-            cornerSize={24}
-            labelFontSize={10}
-            titleFontSize={18}
-            labelOffset={16}
-            titleOffset={16}
-            labelGap={8}
-            className="projects-card-large"
-          />
-        ))}
-      </div>
-
-      {/* Row 2: 4 smaller cards, 305x200 */}
-      <div className="projects-row">
-        {row2.map((p) => (
-          <ProjectCard
-            key={p.title}
-            title={p.title}
-            category={p.category}
-            imageUrl={p.imageUrl}
-            width={305}
-            height={200}
+            width={0}
+            height={0}
             dotSize={6}
-            cornerSize={20}
+            cornerSize={16}
             labelFontSize={9}
             titleFontSize={14}
             labelOffset={12}
             titleOffset={12}
             labelGap={6}
-            className="projects-card-small"
+            mobileLayout={true}
           />
         ))}
+      </div>
+
+      {/* Desktop: two-row grid — shown only above 768px via CSS */}
+      <div className="desktop-projects-grid">
+        {/* Row 1: 3 large cards */}
+        <div className="projects-row">
+          {row1.map((p) => (
+            <ProjectCard
+              key={p.title}
+              title={p.title}
+              category={p.category}
+              imageUrl={p.imageUrl}
+              width={420}
+              height={280}
+              dotSize={8}
+              cornerSize={24}
+              labelFontSize={10}
+              titleFontSize={18}
+              labelOffset={16}
+              titleOffset={16}
+              labelGap={8}
+              className="projects-card-large"
+            />
+          ))}
+        </div>
+
+        {/* Row 2: 4 smaller cards */}
+        <div className="projects-row">
+          {row2.map((p) => (
+            <ProjectCard
+              key={p.title}
+              title={p.title}
+              category={p.category}
+              imageUrl={p.imageUrl}
+              width={305}
+              height={200}
+              dotSize={6}
+              cornerSize={20}
+              labelFontSize={9}
+              titleFontSize={14}
+              labelOffset={12}
+              titleOffset={12}
+              labelGap={6}
+              className="projects-card-small"
+            />
+          ))}
+        </div>
       </div>
     </section>
   );

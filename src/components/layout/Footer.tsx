@@ -3,12 +3,9 @@ import React from 'react';
 const Footer: React.FC = () => {
   return (
     <footer
+      className="footer-wrapper"
       style={{
         backgroundColor: '#000000',
-        paddingTop: '64px',
-        paddingBottom: '64px',
-        paddingLeft: '60px',
-        paddingRight: '60px',
         display: 'flex',
         flexDirection: 'column',
         gap: '48px',
@@ -17,19 +14,19 @@ const Footer: React.FC = () => {
     >
       {/* Top row */}
       <div
+        className="footer-top-row"
         style={{
           display: 'flex',
-          justifyContent: 'space-between',
           width: '100%',
         }}
       >
         {/* Brand column — 300px */}
         <div
+          className="footer-brand"
           style={{
             display: 'flex',
             flexDirection: 'column',
             gap: '16px',
-            width: '300px',
           }}
         >
           {/* Logo */}
@@ -72,7 +69,7 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Links columns */}
-        <div style={{ display: 'flex', gap: '80px' }}>
+        <div className="footer-links" style={{ display: 'flex' }}>
           {/* Navigation column */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <span
@@ -137,10 +134,9 @@ const Footer: React.FC = () => {
 
       {/* Bottom row */}
       <div
+        className="footer-bottom-row"
         style={{
           display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
           paddingTop: '24px',
           borderTop: '1px solid #333333',
           width: '100%',

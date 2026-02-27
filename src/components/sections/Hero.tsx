@@ -77,7 +77,7 @@ const Hero: React.FC = () => {
     <section
       style={{
         backgroundColor: '#000000',
-        height: '820px',
+        height: 'clamp(550px, 70vh, 820px)',
         width: '100%',
         position: 'relative',
         overflow: 'hidden',
@@ -112,38 +112,38 @@ const Hero: React.FC = () => {
         }}
       />
 
-      {/* Viewfinder Frame: 1320x660, at x:60, y:80 */}
+      {/* Viewfinder Frame */}
       <div
         style={{
           position: 'absolute',
-          left: '60px',
-          top: '80px',
-          width: 'calc(100% - 120px)',
-          height: '660px',
+          left: 'clamp(16px, 4vw, 60px)',
+          top: 'clamp(40px, 5vh, 80px)',
+          width: 'calc(100% - clamp(32px, 8vw, 120px))',
+          height: 'calc(100% - clamp(60px, 10vh, 160px))',
           zIndex: 2,
         }}
       >
-        {/* Corner Brackets — 60x60px, white, 2px */}
-        <CornerBracket position="tl" size={60} color="#FFFFFF" thickness={2} />
-        <CornerBracket position="tr" size={60} color="#FFFFFF" thickness={2} />
-        <CornerBracket position="bl" size={60} color="#FFFFFF" thickness={2} />
-        <CornerBracket position="br" size={60} color="#FFFFFF" thickness={2} />
+        {/* Corner Brackets */}
+        <CornerBracket position="tl" size={50} color="#FFFFFF" thickness={2} />
+        <CornerBracket position="tr" size={50} color="#FFFFFF" thickness={2} />
+        <CornerBracket position="bl" size={50} color="#FFFFFF" thickness={2} />
+        <CornerBracket position="br" size={50} color="#FFFFFF" thickness={2} />
 
-        {/* REC Indicator — x:40, y:40 */}
+        {/* REC Indicator — top-left */}
         <div
           style={{
             position: 'absolute',
-            left: '40px',
-            top: '40px',
+            left: 'clamp(16px, 3vw, 40px)',
+            top: 'clamp(16px, 3vh, 40px)',
             display: 'flex',
             alignItems: 'center',
-            gap: '12px',
+            gap: '8px',
           }}
         >
           <div
             style={{
-              width: '16px',
-              height: '16px',
+              width: 'clamp(12px, 1.2vw, 16px)',
+              height: 'clamp(12px, 1.2vw, 16px)',
               borderRadius: '50%',
               backgroundColor: '#FF0000',
               animation: 'recBlink 1s infinite',
@@ -152,7 +152,7 @@ const Hero: React.FC = () => {
           <span
             style={{
               fontFamily: 'Space Mono, monospace',
-              fontSize: '18px',
+              fontSize: 'clamp(14px, 1.5vw, 18px)',
               fontWeight: 700,
               color: '#FF0000',
               letterSpacing: '2px',
@@ -166,11 +166,11 @@ const Hero: React.FC = () => {
         <div
           style={{
             position: 'absolute',
-            right: '40px',
-            top: '40px',
+            right: 'clamp(16px, 3vw, 40px)',
+            top: 'clamp(16px, 3vh, 40px)',
             display: 'flex',
             alignItems: 'center',
-            gap: '12px',
+            gap: '10px',
           }}
         >
           {/* Battery Icon */}
@@ -197,7 +197,7 @@ const Hero: React.FC = () => {
           <span
             style={{
               fontFamily: 'Space Mono, monospace',
-              fontSize: '14px',
+              fontSize: 'clamp(11px, 1.2vw, 14px)',
               fontWeight: 400,
               color: '#FFFFFF',
             }}
@@ -206,32 +206,36 @@ const Hero: React.FC = () => {
           </span>
         </div>
 
-        {/* Hero Content — centered, 900px wide, y:130 */}
+        {/* Hero Content — centered */}
         <div
           style={{
             position: 'absolute',
             left: '50%',
             transform: 'translateX(-50%)',
-            top: '130px',
-            width: '900px',
-            height: '400px',
+            top: 'clamp(80px, 12vh, 130px)',
+            width: 'min(900px, 85%)',
+            maxWidth: 'calc(100% - 32px)',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
-            gap: '32px',
+            gap: 'clamp(16px, 3vw, 32px)',
+            boxSizing: 'border-box',
           }}
         >
           <h1
             style={{
               fontFamily: 'Inter, sans-serif',
-              fontSize: '72px',
+              fontSize: 'clamp(26px, 6vw, 72px)',
               fontWeight: 800,
               color: '#FFFFFF',
-              letterSpacing: '-2px',
+              letterSpacing: 'clamp(-1px, -0.15vw, -2px)',
               textAlign: 'center',
               margin: 0,
               lineHeight: 1.1,
+              width: '100%',
+              wordBreak: 'break-word',
+              overflowWrap: 'break-word',
             }}
           >
             WHERE YOUR VISION
@@ -242,61 +246,75 @@ const Hero: React.FC = () => {
           <p
             style={{
               fontFamily: 'Space Mono, monospace',
-              fontSize: '16px',
+              fontSize: 'clamp(12px, 1.5vw, 16px)',
               fontWeight: 400,
               color: '#888888',
               textAlign: 'center',
               lineHeight: 1.6,
-              width: '600px',
+              width: '100%',
+              maxWidth: '600px',
               margin: 0,
+              paddingLeft: '8px',
+              paddingRight: '8px',
+              boxSizing: 'border-box',
             }}
           >
             Complete filmproducties van A tot Z, volledig op maat gemaakt voor jouw visie.
           </p>
 
-          {/* CTA Buttons */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+          {/* CTA Buttons — CSS-driven layout: column on mobile, row on desktop */}
+          <div className="hero-cta-buttons">
             {/* Primary: border white */}
             <div
+              className="hero-cta-btn"
               style={{
                 display: 'flex',
                 alignItems: 'center',
+                justifyContent: 'center',
                 gap: '10px',
-                padding: '16px 32px',
+                padding: 'clamp(12px, 1.5vh, 16px) clamp(16px, 2.5vw, 32px)',
                 border: '1px solid #FFFFFF',
                 cursor: 'pointer',
+                boxSizing: 'border-box',
+                maxWidth: '100%',
               }}
             >
               <span
                 style={{
                   fontFamily: 'Space Mono, monospace',
-                  fontSize: '14px',
+                  fontSize: 'clamp(11px, 1.2vw, 14px)',
                   fontWeight: 600,
                   color: '#FFFFFF',
                   letterSpacing: '1px',
+                  whiteSpace: 'nowrap',
                 }}
               >
-                ▶ BEKIJK ONS WERK
+                &#9654; BEKIJK ONS WERK
               </span>
             </div>
 
             {/* Secondary: transparent */}
             <div
+              className="hero-cta-btn"
               style={{
                 display: 'flex',
                 alignItems: 'center',
+                justifyContent: 'center',
                 gap: '10px',
-                padding: '16px 32px',
+                padding: 'clamp(12px, 1.5vh, 16px) clamp(16px, 2.5vw, 32px)',
                 cursor: 'pointer',
+                boxSizing: 'border-box',
+                maxWidth: '100%',
               }}
             >
               <span
                 style={{
                   fontFamily: 'Space Mono, monospace',
-                  fontSize: '14px',
+                  fontSize: 'clamp(11px, 1.2vw, 14px)',
                   fontWeight: 500,
                   color: '#666666',
                   letterSpacing: '1px',
+                  whiteSpace: 'nowrap',
                 }}
               >
                 START JOUW PROJECT
@@ -305,12 +323,12 @@ const Hero: React.FC = () => {
           </div>
         </div>
 
-        {/* Timecode HUD — x:40, y:600 */}
+        {/* Timecode HUD — bottom-left */}
         <div
           style={{
             position: 'absolute',
-            left: '40px',
-            top: '600px',
+            left: 'clamp(16px, 3vw, 40px)',
+            bottom: '20px',
             display: 'flex',
             alignItems: 'center',
             gap: '8px',
@@ -319,7 +337,7 @@ const Hero: React.FC = () => {
           <span
             style={{
               fontFamily: 'Space Mono, monospace',
-              fontSize: '18px',
+              fontSize: 'clamp(12px, 1.5vw, 18px)',
               fontWeight: 400,
               color: '#FFFFFF',
               letterSpacing: '2px',
@@ -329,21 +347,21 @@ const Hero: React.FC = () => {
           </span>
         </div>
 
-        {/* Resolution HUD — bottom-right corner */}
+        {/* Resolution HUD — bottom-right */}
         <div
           style={{
             position: 'absolute',
-            right: '40px',
-            top: '600px',
+            right: 'clamp(16px, 3vw, 40px)',
+            bottom: '20px',
             display: 'flex',
             alignItems: 'center',
-            gap: '16px',
+            gap: '12px',
           }}
         >
           <span
             style={{
               fontFamily: 'Space Mono, monospace',
-              fontSize: '14px',
+              fontSize: 'clamp(10px, 1.2vw, 14px)',
               fontWeight: 400,
               color: '#888888',
               letterSpacing: '1px',
@@ -354,7 +372,7 @@ const Hero: React.FC = () => {
           <span
             style={{
               fontFamily: 'Space Mono, monospace',
-              fontSize: '14px',
+              fontSize: 'clamp(10px, 1.2vw, 14px)',
               fontWeight: 400,
               color: '#888888',
               letterSpacing: '1px',

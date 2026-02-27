@@ -6,30 +6,26 @@ const About: React.FC = () => {
       id="over-ons"
       style={{
         backgroundColor: '#000000',
-        paddingTop: '100px',
-        paddingBottom: '100px',
-        paddingLeft: '60px',
-        paddingRight: '60px',
+        paddingTop: 'clamp(60px, 8vw, 100px)',
+        paddingBottom: 'clamp(60px, 8vw, 100px)',
+        paddingLeft: 'clamp(24px, 4vw, 60px)',
+        paddingRight: 'clamp(24px, 4vw, 60px)',
         display: 'flex',
         flexDirection: 'column',
-        gap: '64px',
+        gap: 'clamp(40px, 6vw, 64px)',
         width: '100%',
       }}
     >
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          width: '100%',
-        }}
-      >
+      {/* Two-column layout — CSS-driven: column on mobile, row on desktop */}
+      <div className="section-about-columns">
         {/* Left column */}
         <div
           style={{
             display: 'flex',
             flexDirection: 'column',
             gap: '32px',
-            width: '600px',
+            width: '100%',
+            maxWidth: '600px',
           }}
         >
           {/* Label */}
@@ -61,13 +57,13 @@ const About: React.FC = () => {
           <h2
             style={{
               fontFamily: 'Inter, sans-serif',
-              fontSize: '36px',
+              fontSize: 'clamp(24px, 3.5vw, 36px)',
               fontWeight: 700,
               color: '#FFFFFF',
               letterSpacing: '-0.5px',
               lineHeight: 1.3,
               margin: 0,
-              width: '600px',
+              width: '100%',
             }}
           >
             Wij zijn VirgilReality — een video productie studio waar jouw visie werkelijkheid wordt.
@@ -82,27 +78,21 @@ const About: React.FC = () => {
               color: '#888888',
               lineHeight: 1.7,
               margin: 0,
-              width: '550px',
+              width: '100%',
             }}
           >
             Van concept tot eindproduct, wij verzorgen complete filmproducties die jouw verhaal op de krachtigste manier vertellen. Geen templates, geen standaard oplossingen — alleen maatwerk dat past bij jouw unieke visie.
           </p>
         </div>
 
-        {/* Right: Stats */}
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '40px',
-          }}
-        >
+        {/* Right: Stats — CSS-driven: row/wrap on mobile, column on desktop */}
+        <div className="about-stats">
           {/* Stat 1 */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', minWidth: '80px' }}>
             <span
               style={{
                 fontFamily: 'Inter, sans-serif',
-                fontSize: '64px',
+                fontSize: 'clamp(40px, 6vw, 64px)',
                 fontWeight: 800,
                 color: '#FFFFFF',
                 letterSpacing: '-2px',
@@ -124,11 +114,11 @@ const About: React.FC = () => {
           </div>
 
           {/* Stat 2 */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', minWidth: '80px' }}>
             <span
               style={{
                 fontFamily: 'Inter, sans-serif',
-                fontSize: '64px',
+                fontSize: 'clamp(40px, 6vw, 64px)',
                 fontWeight: 800,
                 color: '#FFFFFF',
                 letterSpacing: '-2px',
@@ -150,11 +140,11 @@ const About: React.FC = () => {
           </div>
 
           {/* Stat 3 */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', minWidth: '80px' }}>
             <span
               style={{
                 fontFamily: 'Inter, sans-serif',
-                fontSize: '64px',
+                fontSize: 'clamp(40px, 6vw, 64px)',
                 fontWeight: 800,
                 color: '#FF0000',
                 letterSpacing: '-2px',
