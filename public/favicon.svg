@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Film reel outer circle -->
+  <circle cx="50" cy="50" r="48" fill="#111" stroke="#e63946" stroke-width="3"/>
+  <!-- Center hub -->
+  <circle cx="50" cy="50" r="12" fill="#e63946"/>
+  <circle cx="50" cy="50" r="5" fill="#111"/>
+  <!-- Sprocket holes -->
+  <circle cx="50" cy="20" r="7" fill="#e63946"/>
+  <circle cx="50" cy="80" r="7" fill="#e63946"/>
+  <circle cx="20" cy="50" r="7" fill="#e63946"/>
+  <circle cx="80" cy="50" r="7" fill="#e63946"/>
+  <circle cx="28.8" cy="28.8" r="7" fill="#e63946"/>
+  <circle cx="71.2" cy="71.2" r="7" fill="#e63946"/>
+  <circle cx="71.2" cy="28.8" r="7" fill="#e63946"/>
+  <circle cx="28.8" cy="71.2" r="7" fill="#e63946"/>
+</svg>
