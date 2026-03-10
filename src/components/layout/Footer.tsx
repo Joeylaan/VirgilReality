@@ -152,6 +152,14 @@ const Footer: React.FC = () => {
         >
           © 2024 VirgilReality. All rights reserved.
         </span>
+        <a 
+          style={{
+            fontFamily: 'Space Mono, monospace',
+            fontSize: '11px',
+            fontWeight: 400,
+            color: '#666666',
+          }}
+          href="https://laanify.com">Gemaakt door Laanify</a>
         <span
           style={{
             fontFamily: 'Space Mono, monospace',
